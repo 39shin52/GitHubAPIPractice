@@ -24,7 +24,7 @@ class GitHubClient{
             case (_,_,let error?):
                 completion(Result(error: .connectionError(error)))
             case (let data?, let response?,_): do {
-                let response = try request.responce(from: data, urlResponce: response)
+                let response = try request.respone(from: data, urlResponse: response)
                 
                 completion(Result(value: response))
             } catch let error as GitHubAPIError{
@@ -34,12 +34,10 @@ class GitHubClient{
                 
                 completion(Result(error: .responseParseError(error)))
                 }
-                default:
-                fatalError("invalid response combination\(data), \(response), \(error).")
-                }
+            default:
+                fatalError("invalid response combination \(String(describing: data)), \(String(describing: response)), \(String(describing: error)).")
             }
         }
-        
         task.resume()
     }
 }
