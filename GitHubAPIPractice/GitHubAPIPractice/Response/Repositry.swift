@@ -6,15 +6,14 @@
 //  Copyright © 2019 Itou Shingo. All rights reserved.
 //
 
-import Foundation
 
-struct Repositry:Decodable{
+struct Repository:Decodable{
     let id:Int
     let name:String
     let fullName:String
-    let Owner:User
+    let owner:User
     
-    enum CodingKets:String,CodingKey{
+    enum CodingKeys:String,CodingKey{
         case id
         case name
         case fullName = "full_name"

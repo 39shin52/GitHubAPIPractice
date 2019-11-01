@@ -6,7 +6,6 @@
 //  Copyright © 2019 Itou Shingo. All rights reserved.
 //
 
-import Foundation
 
 struct User:Decodable{
     let id :Int

@@ -15,7 +15,6 @@ protocol GitHubRequest {
     var path:String{ get }
     var method:HTTPMethod{ get }
     var queryItems:[URLQueryItem] { get }
-    var body:Encodable?{ get }
     
 }
 
@@ -26,7 +25,7 @@ extension GitHubRequest{
     
     func buildURLRequest() -> URLRequest{
         let url = baseURL.appendingPathComponent(path)
-        var components = URLComponents(url: url, resolvingAgainstBaseURL: resolvingAgainstBaseURL: true)
+        var components = URLComponents(url: url, resolvingAgainstBaseURL: true)
         
         switch method {
         case .get:
@@ -42,10 +41,10 @@ extension GitHubRequest{
         return urlRequest
     }
     
-    func responce(from data: Data, urlResponce: URLResponse) throws -> Response {
+    func response(from data: Data, urlResponse: URLResponse) throws -> Response {
         let decoder = JSONDecoder()
-        
-        if case (200..<300)? = (urlResponse as? HTTPURLResponse)?.statusCode{
+
+        if case (200..<300)? = (urlResponse as? HTTPURLResponse)?.statusCode {
             //JSONからモデルをインスタンス化
             return try decoder.decode(Response.self, from: data)
         } else {
