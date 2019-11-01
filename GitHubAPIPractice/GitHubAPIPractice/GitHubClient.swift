@@ -24,7 +24,7 @@ class GitHubClient{
             case (_,_,let error?):
                 completion(Result(error: .connectionError(error)))
             case (let data?, let response?,_): do {
-                let response = try request.respone(from: data, urlResponse: response)
+                let response = try request.response(from: data, urlResponse: response)
                 
                 completion(Result(value: response))
             } catch let error as GitHubAPIError{
